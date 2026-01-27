@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Connection Toolkit - Intentional questions for deeper relationships and self-reflection">
+    <meta name="keywords" content="relationships, dating, journaling, self-reflection, mental health, communication">
+    <meta name="author" content="Connection Toolkit">
+    <title>Connection Toolkit - Intentional Relationship Questions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .mode-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+
+        .mode-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .mode-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .mode-card.active {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+        }
+
+        .mode-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .mode-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .mode-desc {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .card-container {
+            padding: 40px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            animation: slideIn 0.4s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-number {
+            color: #667eea;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .question-text {
+            font-size: 1.5em;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .question-category {
+            display: inline-block;
+            background: #667eea20;
+            color: #667eea;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #667eea10;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 40px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .start-screen {
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .start-screen h2 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .start-screen p {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .feature-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .feature-text {
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .question-text {
+                font-size: 1.2em;
+            }
+            
+            .mode-selector {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💭 Connection Toolkit</h1>
+            <p>Intentional questions for deeper relationships</p>
+        </div>
+
+        <div id="startScreen" class="start-screen">
+            <h2>Choose Your Journey</h2>
+            <p>Select a mode below to begin exploring meaningful conversations</p>
+            
+            <div class="mode-selector">
+                <div class="mode-card" onclick="selectMode('dating')">
+                    <div class="mode-icon">💑</div>
+                    <div class="mode-title">Dating Mode</div>
+                    <div class="mode-desc">First dates to deep bonds</div>
+                </div>
+                
+                <div class="mode-card" onclick="selectMode('journaling')">
+                    <div class="mode-icon">📓</div>
+                    <div class="mode-title">Self-Reflection</div>
+                    <div class="mode-desc">Guided journaling journey</div>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-text">Structured progression from casual to intimate</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🧠</div>
+                    <div class="feature-text">Research-backed conversation design</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✨</div>
+                    <div class="feature-text">Non-religious, universal approach</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="datingLevelSelector" class="hidden">
+            <div class="mode-selector">
+                <div class="mode-card" onclick="startQuestions('first-date')">
+                    <div class="mode-icon">☕</div>
+                    <div class="mode-title">First Date</div>
+                    <div class="mode-desc">Light, warm-up questions</div>
+                </div>
+                
+                <div class="mode-card" onclick="startQuestions('third-date')">
+                    <div class="mode-icon">🌟</div>
+                    <div class="mode-title">Third Date</div>
+                    <div class="mode-desc">Exploring compatibility</div>
+                </div>
+                
+                <div class="mode-card" onclick="startQuestions('deep-bond')">
+                    <div class="mode-icon">❤️</div>
+                    <div class="mode-title">Deep Connection</div>
+                    <div class="mode-desc">Intimate vulnerability</div>
+                </div>
+            </div>
+            <div style="text-align: center; padding: 20px;">
+                <button class="btn btn-secondary" onclick="goBack()">← Back to Modes</button>
+            </div>
+        </div>
+
+        <div id="journalingPhaseSelector" class="hidden">
+            <div class="mode-selector">
+                <div class="mode-card" onclick="startQuestions('phase-1')">
+                    <div class="mode-icon">🔍</div>
+                    <div class="mode-title">Phase 1</div>
+                    <div class="mode-desc">Self-Awareness</div>
+                </div>
+                
+                <div class="mode-card" onclick="startQuestions('phase-2')">
+                    <div class="mode-icon">💭</div>
+                    <div class="mode-title">Phase 2</div>
+                    <div class="mode-desc">Emotional Truth</div>
+                </div>
+                
+                <div class="mode-card" onclick="startQuestions('phase-3')">
+                    <div class="mode-icon">⚖️</div>
+                    <div class="mode-title">Phase 3</div>
+                    <div class="mode-desc">Values & Needs</div>
+                </div>
+                
+                <div class="mode-card" onclick="startQuestions('phase-4')">
+                    <div class="mode-icon">🌱</div>
+                    <div class="mode-title">Phase 4</div>
+                    <div class="mode-desc">Integration</div>
+                </div>
+            </div>
+            <div style="text-align: center; padding: 20px;">
+                <button class="btn btn-secondary" onclick="goBack()">← Back to Modes</button>
+            </div>
+        </div>
+
+        <div id="questionScreen" class="hidden">
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+            </div>
+            
+            <div class="card-container">
+                <div class="question-card">
+                    <div id="questionCategory" class="question-category"></div>
+                    <div id="questionNumber" class="question-number"></div>
+                    <div id="questionText" class="question-text"></div>
+                    
+                    <div class="controls">
+                        <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()">
+                            ← Previous
+                        </button>
+                        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">
+                            Next →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; padding: 20px;">
+                <button class="btn btn-secondary" onclick="endSession()">End Session</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            Open source on <a href="https://github.com/YOUR_USERNAME/connection-toolkit" target="_blank">GitHub</a>
+        </div>
+    </div>
+
+    <script>
+        const questions = {
+            'first-date': {
+                category: 'First Date',
+                questions: [
+                    { theme: 'Icebreaker', text: 'What's been the best part of your week so far?' },
+                    { theme: 'Passions', text: 'What's something you're excited about right now?' },
+                    { theme: 'Curiosity', text: 'If you could learn any skill instantly, what would it be?' },
+                    { theme: 'Lifestyle', text: 'What does a perfect Saturday look like for you?' },
+                    { theme: 'Values', text: 'What's something that always makes you laugh?' },
+                    { theme: 'Connection', text: 'What do you value most in friendships?' },
+                    { theme: 'Growth', text: 'What's something new you've tried recently?' },
+                    { theme: 'Perspective', text: 'What's a belief you've changed your mind about?' },
+                    { theme: 'Preferences', text: 'How do you prefer to spend your downtime?' },
+                    { theme: 'Interests', text: 'What's a topic you could talk about for hours?' }
+                ]
+            },
+            'third-date': {
+                category: 'Third Date',
+                questions: [
+                    { theme: 'Communication', text: 'How do you usually handle disagreements?' },
+                    { theme: 'Past', text: 'What's a relationship pattern you've noticed in yourself?' },
+                    { theme: 'Boundaries', text: 'What do you need when you're feeling overwhelmed?' },
+                    { theme: 'Love Languages', text: 'How do you prefer to show care for people you're close to?' },
+                    { theme: 'Future', text: 'What does a fulfilling relationship look like to you?' },
+                    { theme: 'Conflict', text: 'What's your default response when someone hurts your feelings?' },
+                    { theme: 'Intimacy', text: 'What makes you feel truly seen and understood?' },
+                    { theme: 'Growth', text: 'What's something you're actively working on in yourself?' },
+                    { theme: 'Expectations', text: 'What are your non-negotiables in a relationship?' },
+                    { theme: 'Connection', text: 'What does emotional safety mean to you?' }
+                ]
+            },
+            'deep-bond': {
+                category: 'Deep Connection',
+                questions: [
+                    { theme: 'Vulnerability', text: 'What's a fear you rarely share with others?' },
+                    { theme: 'Wounds', text: 'What's an experience that fundamentally changed how you see relationships?' },
+                    { theme: 'Attachment', text: 'What patterns from your childhood show up in your relationships now?' },
+                    { theme: 'Shame', text: 'What's something you've been afraid to be honest about?' },
+                    { theme: 'Growth', text: 'What parts of yourself are you still learning to accept?' },
+                    { theme: 'Intimacy', text: 'When do you feel most connected to someone?' },
+                    { theme: 'Trust', text: 'What does it take for you to feel safe being fully yourself?' },
+                    { theme: 'Values', text: 'What matters more to you than most people realize?' },
+                    { theme: 'Future', text: 'What kind of person do you want to become?' },
+                    { theme: 'Love', text: 'How do you know when you truly love someone?' }
+                ]
+            },
+            'phase-1': {
+                category: 'Self-Awareness',
+                questions: [
+                    { theme: 'Patterns', text: 'What patterns do you notice in how you react when stressed?' },
+                    { theme: 'Emotions', text: 'Which emotions are easiest for you to feel? Which are hardest?' },
+                    { theme: 'Triggers', text: 'What situations tend to make you feel defensive or shut down?' },
+                    { theme: 'Defaults', text: 'When conflict arises, what's your go-to response?' },
+                    { theme: 'Comfort', text: 'What do you do when you need to feel safe or comforted?' },
+                    { theme: 'Avoidance', text: 'What feelings or situations do you tend to avoid?' },
+                    { theme: 'Energy', text: 'What drains your energy? What restores it?' },
+                    { theme: 'Boundaries', text: 'Where do you struggle to set or maintain boundaries?' },
+                    { theme: 'Self-perception', text: 'How do you think others perceive you vs. how you see yourself?' },
+                    { theme: 'Needs', text: 'What do you need from yourself when things feel hard?' }
+                ]
+            },
+            'phase-2': {
+                category: 'Emotional Truth',
+                questions: [
+                    { theme: 'Feelings', text: 'What emotion are you avoiding right now, if any?' },
+                    { theme: 'Shame', text: 'What do you feel ashamed about that you've never said out loud?' },
+                    { theme: 'Anger', text: 'What are you angry about, even if it seems irrational?' },
+                    { theme: 'Grief', text: 'What loss are you still carrying?' },
+                    { theme: 'Loneliness', text: 'When do you feel most alone, even around others?' },
+                    { theme: 'Fear', text: 'What are you afraid might be true about yourself?' },
+                    { theme: 'Joy', text: 'What brings you genuine joy that you don't prioritize enough?' },
+                    { theme: 'Guilt', text: 'What do you feel guilty about that you can't seem to let go of?' },
+                    { theme: 'Resentment', text: 'Who or what do you resent, and why?' },
+                    { theme: 'Peace', text: 'What would it feel like to truly forgive yourself?' }
+                ]
+            },
+            'phase-3': {
+                category: 'Values & Needs',
+                questions: [
+                    { theme: 'Values', text: 'What do you value that you're not currently honoring?' },
+                    { theme: 'Integrity', text: 'Where are you out of alignment with your own values?' },
+                    { theme: 'Needs', text: 'What do you need that you're afraid to ask for?' },
+                    { theme: 'Desires', text: 'What do you want that feels too selfish to admit?' },
+                    { theme: 'Priorities', text: 'If you could redesign your life around what truly matters, what would change?' },
+                    { theme: 'Sacrifice', text: 'What are you sacrificing that you don't want to sacrifice anymore?' },
+                    { theme: 'Authenticity', text: 'Where are you performing instead of being yourself?' },
+                    { theme: 'Growth', text: 'What growth are you resisting because it feels too hard?' },
+                    { theme: 'Courage', text: 'What would you do if you weren't afraid of judgment?' },
+                    { theme: 'Purpose', text: 'What would make your life feel more meaningful?' }
+                ]
+            },
+            'phase-4': {
+                category: 'Integration',
+                questions: [
+                    { theme: 'Acceptance', text: 'What part of yourself are you ready to accept?' },
+                    { theme: 'Forgiveness', text: 'What do you need to forgive yourself for?' },
+                    { theme: 'Action', text: 'What's one small step you can take toward who you want to become?' },
+                    { theme: 'Commitment', text: 'What are you committing to doing differently?' },
+                    { theme: 'Boundaries', text: 'What boundary do you need to set or strengthen?' },
+                    { theme: 'Release', text: 'What are you ready to let go of?' },
+                    { theme: 'Growth', text: 'How do you want to show up differently in your relationships?' },
+                    { theme: 'Compassion', text: 'What does self-compassion look like for you right now?' },
+                    { theme: 'Future', text: 'What kind of person do you want to be six months from now?' },
+                    { theme: 'Integration', text: 'What have you learned about yourself that you want to remember?' }
+                ]
+            }
+        };
+
+        let currentMode = null;
+        let currentLevel = null;
+        let currentQuestionIndex = 0;
+        let currentQuestions = [];
+
+        function selectMode(mode) {
+            currentMode = mode;
+            document.getElementById('startScreen').classList.add('hidden');
+            
+            if (mode === 'dating') {
+                document.getElementById('datingLevelSelector').classList.remove('hidden');
+            } else {
+                document.getElementById('journalingPhaseSelector').classList.remove('hidden');
+            }
+        }
+
+        function startQuestions(level) {
+            currentLevel = level;
+            currentQuestions = questions[level].questions;
+            currentQuestionIndex = 0;
+            
+            document.getElementById('datingLevelSelector').classList.add('hidden');
+            document.getElementById('journalingPhaseSelector').classList.add('hidden');
+            document.getElementById('questionScreen').classList.remove('hidden');
+            
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            const q = currentQuestions[currentQuestionIndex];
+            const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
+            
+            document.getElementById('questionCategory').textContent = q.theme;
+            document.getElementById('questionNumber').textContent = 
+                `Question ${currentQuestionIndex + 1} of ${currentQuestions.length}`;
+            document.getElementById('questionText').textContent = q.text;
+            document.getElementById('progressFill').style.width = progress + '%';
+
+            // Update button states
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.disabled = currentQuestionIndex === 0;
+            
+            if (currentQuestionIndex === currentQuestions.length - 1) {
+                nextBtn.textContent = 'Complete ✓';
+            } else {
+                nextBtn.textContent = 'Next →';
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < currentQuestions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion();
+            } else {
+                // Completed all questions
+                const levelName = questions[currentLevel].category;
+                if (confirm(`🎉 You've completed all questions in ${levelName}!\n\nWould you like to continue with another section?`)) {
+                    endSession();
+                }
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion();
+            }
+        }
+
+        function goBack() {
+            document.getElementById('datingLevelSelector').classList.add('hidden');
+            document.getElementById('journalingPhaseSelector').classList.add('hidden');
+            document.getElementById('startScreen').classList.remove('hidden');
+            currentMode = null;
+        }
+
+        function endSession() {
+            document.getElementById('questionScreen').classList.add('hidden');
+            
+            if (currentMode === 'dating') {
+                document.getElementById('datingLevelSelector').classList.remove('hidden');
+            } else {
+                document.getElementById('journalingPhaseSelector').classList.remove('hidden');
+            }
+            
+            currentLevel = null;
+            currentQuestionIndex = 0;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (document.getElementById('questionScreen').classList.contains('hidden')) return;
+            
+            if (e.key === 'ArrowLeft') {
+                previousQuestion();
+            } else if (e.key === 'ArrowRight') {
+                nextQuestion();
+            }
+        });
+    </script>
+</body>
+</html>
