@@ -26,7 +26,7 @@
 ## 🚀 Quick Start
 
 ### Try it now
-Visit the [live demo]((https://energizedastronaut.github.io/Deep-Connection-Toolkit/) or run locally:
+Visit the [Live Demo](https://energizedastronaut.github.io/Deep-Connection-Toolkit/) or run locally:
 
 ```bash
 # Clone the repo
