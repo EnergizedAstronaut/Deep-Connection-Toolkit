@@ -591,11 +591,17 @@
             document.getElementById('journalingPhaseSelector').classList.add('hidden');
             document.getElementById('questionScreen').classList.remove('hidden');
             
-            displayQuestion();
+            window.displayQuestion();
         };
 
         window.displayQuestion = function() {
+            console.log('displayQuestion called');
+            console.log('currentQuestionIndex:', currentQuestionIndex);
+            console.log('currentQuestions length:', currentQuestions.length);
+            
             const q = currentQuestions[currentQuestionIndex];
+            console.log('Current question:', q);
+            
             const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
             
             document.getElementById('questionCategory').textContent = q.theme;
@@ -615,17 +621,19 @@
             } else {
                 nextBtn.textContent = 'Next →';
             }
+            
+            console.log('Question displayed successfully');
         };
 
         window.nextQuestion = function() {
             if (currentQuestionIndex < currentQuestions.length - 1) {
                 currentQuestionIndex++;
-                displayQuestion();
+                window.displayQuestion();
             } else {
                 // Completed all questions
                 const levelName = questions[currentLevel].category;
                 if (confirm(`🎉 You've completed all questions in ${levelName}!\n\nWould you like to continue with another section?`)) {
-                    endSession();
+                    window.endSession();
                 }
             }
         };
@@ -633,7 +641,7 @@
         window.previousQuestion = function() {
             if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
-                displayQuestion();
+                window.displayQuestion();
             }
         };
 
@@ -662,9 +670,9 @@
             if (document.getElementById('questionScreen').classList.contains('hidden')) return;
             
             if (e.key === 'ArrowLeft') {
-                previousQuestion();
+                window.previousQuestion();
             } else if (e.key === 'ArrowRight') {
-                nextQuestion();
+                window.nextQuestion();
             }
         });
     </script>
