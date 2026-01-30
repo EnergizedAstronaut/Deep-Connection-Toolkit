@@ -6,7 +6,7 @@
 
 > A structured toolkit for intentional dating conversations and guided self-reflection.
 
-**[🚀 Live Demo](https://YOUR_USERNAME.github.io/connection-toolkit/)**
+**[🚀 Live Demo](https://energizedastronaut.github.io/Deep-Connection-Toolkit/)**
 
 ---
 
@@ -26,7 +26,7 @@
 ## 🚀 Quick Start
 
 ### Try it now
-Visit the [live demo](https://YOUR_USERNAME.github.io/connection-toolkit/) or run locally:
+Visit the [live demo]((https://energizedastronaut.github.io/Deep-Connection-Toolkit/) or run locally:
 
 ```bash
 # Clone the repo
@@ -123,15 +123,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 MIT License - see [LICENSE](LICENSE) file for details.
 
-This means you can:
-- ✅ Use commercially
-- ✅ Modify freely
-- ✅ Distribute
-- ✅ Use privately
 
-Just include the original license and copyright notice.
-
----
 
 ## 🌟 Inspiration & Credits
 
@@ -146,9 +138,9 @@ Built on principles from:
 
 ## 💬 Feedback & Support
 
-- **Issues** - [GitHub Issues](https://github.com/YOUR_USERNAME/connection-toolkit/issues)
-- **Discussions** - [GitHub Discussions](https://github.com/YOUR_USERNAME/connection-toolkit/discussions)
-- **Email** - your.email@example.com
+- **Issues** - [GitHub Issues]((https://energizedastronaut.github.io/Deep-Connection-Toolkit/issues)
+- **Discussions** - [GitHub Discussions]((https://energizedastronaut.github.io/Deep-Connection-Toolkit/discussions)
+
 
 ---
 
