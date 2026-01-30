@@ -432,6 +432,15 @@
     </div>
 
     <script>
+        // Debug logging
+        console.log('Connection Toolkit script loaded');
+        
+        // Ensure DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM Content Loaded');
+            initializeApp();
+        });
+
         const questions = {
             'first-date': {
                 category: 'First Date',
@@ -545,7 +554,23 @@
         let currentQuestionIndex = 0;
         let currentQuestions = [];
 
-        function selectMode(mode) {
+        // Initialize app - attach event listeners
+        function initializeApp() {
+            console.log('Initializing app...');
+            
+            // Make sure all elements exist
+            const startScreen = document.getElementById('startScreen');
+            const datingLevelSelector = document.getElementById('datingLevelSelector');
+            const journalingPhaseSelector = document.getElementById('journalingPhaseSelector');
+            
+            console.log('Start screen:', startScreen ? 'found' : 'missing');
+            console.log('Dating selector:', datingLevelSelector ? 'found' : 'missing');
+            console.log('Journaling selector:', journalingPhaseSelector ? 'found' : 'missing');
+        }
+
+        // Make functions globally accessible
+        window.selectMode = function(mode) {
+            console.log('selectMode called with:', mode);
             currentMode = mode;
             document.getElementById('startScreen').classList.add('hidden');
             
@@ -554,9 +579,10 @@
             } else {
                 document.getElementById('journalingPhaseSelector').classList.remove('hidden');
             }
-        }
+        };
 
-        function startQuestions(level) {
+        window.startQuestions = function(level) {
+            console.log('startQuestions called with:', level);
             currentLevel = level;
             currentQuestions = questions[level].questions;
             currentQuestionIndex = 0;
@@ -566,9 +592,9 @@
             document.getElementById('questionScreen').classList.remove('hidden');
             
             displayQuestion();
-        }
+        };
 
-        function displayQuestion() {
+        window.displayQuestion = function() {
             const q = currentQuestions[currentQuestionIndex];
             const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
             
@@ -589,9 +615,9 @@
             } else {
                 nextBtn.textContent = 'Next →';
             }
-        }
+        };
 
-        function nextQuestion() {
+        window.nextQuestion = function() {
             if (currentQuestionIndex < currentQuestions.length - 1) {
                 currentQuestionIndex++;
                 displayQuestion();
@@ -602,23 +628,23 @@
                     endSession();
                 }
             }
-        }
+        };
 
-        function previousQuestion() {
+        window.previousQuestion = function() {
             if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
                 displayQuestion();
             }
-        }
+        };
 
-        function goBack() {
+        window.goBack = function() {
             document.getElementById('datingLevelSelector').classList.add('hidden');
             document.getElementById('journalingPhaseSelector').classList.add('hidden');
             document.getElementById('startScreen').classList.remove('hidden');
             currentMode = null;
-        }
+        };
 
-        function endSession() {
+        window.endSession = function() {
             document.getElementById('questionScreen').classList.add('hidden');
             
             if (currentMode === 'dating') {
@@ -629,7 +655,7 @@
             
             currentLevel = null;
             currentQuestionIndex = 0;
-        }
+        };
 
         // Keyboard navigation
         document.addEventListener('keydown', function(e) {
